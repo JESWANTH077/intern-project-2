@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #f4f4f4; }
+        .slider-container { position: relative; width: 80%; max-width: 600px; overflow: hidden; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2); }
+        .slider { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; }
+        img { width: 100%; height: auto; display: block; }
+        .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="https://i.pinimg.com/736x/8c/e7/a3/8ce7a3447fdfb60c4b172feed2bb883d.jpg" alt="Image 1"></div>
+            <div class="slide"><img src="https://i.pinimg.com/736x/89/4d/e6/894de6414c69d9c631e92fe40757799e.jpg" alt="Image 2"></div>
+            <div class="slide"><img src="https://i.pinimg.com/736x/1f/54/31/1f543146bc9ea131af2c7f5185148b27.jpg" alt="Image 3"></div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slider = document.querySelector('.slider');
+        
+        function showSlide(i) {
+            index = (i + slides.length) % slides.length;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+        
+        document.querySelector('.prev').addEventListener('click', () => showSlide(index - 1));
+        document.querySelector('.next').addEventListener('click', () => showSlide(index + 1));
+        
+        setInterval(() => showSlide(index + 1), 3000);
+    </script>
+</body>
+</html>
